@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import Main from '../views/Main.vue'
 
+import store from '../store'
+
 const routes = [
   {
     path: '/welcome',
@@ -18,6 +20,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'Main' && (!store.state.kittenName || !store.state.kittenSrc)) {
+    next({ name: 'Welcome' })
+  } else next()
 })
 
 export default router
