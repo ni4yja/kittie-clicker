@@ -10,15 +10,23 @@
             @click="selectKitten(kitten)"
             :src="kitten.src"
             :key="i"
-            class="p-m-2"
+            class="p-mr-3"
           />
         </div>
       </div>
       <div class="p-field">
         <label for="name" class="p-mr-3">Kitten's Name:</label>
-        <InputText v-model="kittenName" id="name" type="username" />
+        <InputText
+          :modelValue="kittenName"
+          @input="
+            (e) =>
+              updateKittenInfo({ field: 'kittenName', value: e.target.value })
+          "
+          id="name"
+          type="username"
+        />
       </div>
-      <Button label="Submit" class="p-button-outlined" />
+      <Button @click="goPlay" label="Go Play" class="p-button-outlined" />
     </div>
   </div>
 </template>
@@ -26,6 +34,7 @@
 <script>
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'Welcome',
@@ -33,39 +42,36 @@ export default {
     Button,
     InputText
   },
-  data () {
-    return {
-      kittenName: '',
-      kittenSrc: '',
-      kittens: [
-        {
-          src: require('../assets/kittie-1.jpg')
-        },
-        {
-          src: require('../assets/kittie-2.jpg')
-        },
-        {
-          src: require('../assets/kittie-3.jpg')
-        }
-      ]
-    }
+  computed: {
+    ...mapState(['kittenName', 'kittenSrc', 'kittens'])
   },
   methods: {
-    selectKitten (kitten) {
-      this.kittenSrc = kitten
+    ...mapMutations(['updateKittenInfo']),
+    selectKitten (kittenSrc) {
+      this.updateKittenInfo({ field: 'kittenSrc', value: kittenSrc })
+    },
+    goPlay () {
+      if (!this.kittenSrc || !this.kittenName) {
+        this.$toast.add({ severity: 'error', summary: 'Invalid', detail: 'Select a cat image and name the cat, please', life: 5000, group: 'tr' })
+        return
+      }
+      this.$router.push('/')
     }
   }
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 
 body,
 .p-button-label {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-weight: 700;
 }
 
