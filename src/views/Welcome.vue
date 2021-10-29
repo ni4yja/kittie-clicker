@@ -11,6 +11,7 @@
             :src="kitten.src"
             :key="i"
             class="p-mr-3"
+            :class="{ selected: kitten.src === selectedKitten.src}"
           />
         </div>
       </div>
@@ -42,6 +43,11 @@ export default {
     Button,
     InputText
   },
+  data () {
+    return {
+      selectedKitten: {}
+    }
+  },
   computed: {
     ...mapState(['kittenName', 'kittenSrc', 'kittens'])
   },
@@ -49,6 +55,7 @@ export default {
     ...mapMutations(['updateKittenInfo']),
     selectKitten (kittenSrc) {
       this.updateKittenInfo({ field: 'kittenSrc', value: kittenSrc })
+      this.selectedKitten = kittenSrc
     },
     goPlay () {
       if (!this.kittenSrc || !this.kittenName) {
@@ -78,6 +85,10 @@ h4 {
 .welcome-page img {
   width: 250px;
   height: 250px;
+}
+
+.welcome-page img.selected {
+  border: 5px solid #008494;
 }
 
 .welcome-page .p-inputtext {
