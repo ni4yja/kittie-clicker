@@ -8,9 +8,15 @@ export default createStore({
     kittenName: '',
     kittenUrl: '',
     kittens: [
-      'https://placekitten.com/300/303',
-      'https://placekitten.com/300/304',
-      'https://placekitten.com/300/305'
+      {
+        src: require('../assets/kittie-1.jpg')
+      },
+      {
+        src: require('../assets/kittie-2.jpg')
+      },
+      {
+        src: require('../assets/kittie-3.jpg')
+      }
     ],
     timer: null,
     seconds: 0,
