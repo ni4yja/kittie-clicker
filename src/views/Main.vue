@@ -7,6 +7,7 @@
       <p>Time: {{ seconds }}</p>
       <img :src="kittenSrc.src" alt="player" @click="incrementPurrs" class="cat-circle">
       <Button @click="resetSeconds" label="Reset Timer" class="p-button-outlined p-mt-5" />
+      <Button @click="restartGame" label="Restart Game" class="p-button-danger p-button-outlined p-mt-5" />
     </div>
     <Divider layout="vertical"/>
     <div class="p-col-5">
@@ -39,6 +40,9 @@ export default {
     ...mapActions(['createTimer', 'clearTimer']),
     resetSeconds () {
       this.setSeconds(0)
+    },
+    restartGame () {
+      this.$router.push('/welcome')
     }
   },
   mounted () {
