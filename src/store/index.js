@@ -6,7 +6,7 @@ import items from '@/data/items'
 export default createStore({
   state: {
     kittenName: '',
-    kittenUrl: '',
+    kittenSrc: '',
     kittens: [
       {
         src: require('../assets/kittie-1.jpg')
@@ -62,8 +62,13 @@ export default createStore({
     autoUpdatePurrs (state) {
       state.totalPurrs += state.autoPurrsPerSecond
     },
-    resetAutoUpdatePurrs (state) {
-      state.totalPurrs += 0
+    resetKittenInfo (state) {
+      state.kittenName = ''
+      state.kittenSrc = ''
+      state.totalPurrs = 0
+      state.totalSpent = 0
+      state.purchasedItems = []
+      state.autoPurrsPerSecond = 0
     }
   },
   actions: {
@@ -76,7 +81,6 @@ export default createStore({
     },
     clearTimer ({ state }) {
       clearInterval(state.timer)
-      console.log(state.timer)
     }
   },
   modules: {

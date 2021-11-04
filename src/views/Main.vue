@@ -36,19 +36,13 @@ export default {
     ...mapGetters(['currentTotal'])
   },
   methods: {
-    ...mapMutations(['setSeconds', 'incrementPurrs', 'updateKittenInfo', 'resetAutoUpdatePurrs']),
+    ...mapMutations(['setSeconds', 'incrementPurrs', 'updateKittenInfo', 'resetKittenInfo']),
     ...mapActions(['createTimer', 'clearTimer']),
     resetSeconds () {
       this.setSeconds(0)
     },
     restartGame () {
-      this.updateKittenInfo({ field: 'kittenName', value: '' })
-      this.updateKittenInfo({ field: 'kittenSrc', value: '' })
-      this.updateKittenInfo({ field: 'totalPurrs', value: 0 })
-      this.updateKittenInfo({ field: 'totalSpent', value: 0 })
-      // this.updateKittenInfo({ field: 'purchasedItems', value: [] })
-      this.clearTimer()
-      // this.resetAutoUpdatePurrs()
+      this.resetKittenInfo()
       this.$router.push('/welcome')
     }
   },
