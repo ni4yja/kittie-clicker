@@ -49,7 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['kittenName', 'kittenSrc', 'kittens', 'totalPurrs', 'totalSpent'])
+    ...mapState(['kittenName', 'kittenSrc', 'kittens'])
   },
   methods: {
     ...mapMutations(['updateKittenInfo', 'setSeconds']),
@@ -62,7 +62,6 @@ export default {
         this.$toast.add({ severity: 'error', summary: 'Invalid', detail: 'Select a cat image and name the cat, please', life: 5000, group: 'tr' })
         return
       }
-      this.updateKittenInfo({ field: 'totalPurrs', value: 0 }, { field: 'totalSpent', value: 0 })
       this.setSeconds(0)
       this.$router.push('/')
     }

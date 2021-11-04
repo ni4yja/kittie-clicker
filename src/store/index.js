@@ -61,6 +61,9 @@ export default createStore({
     },
     autoUpdatePurrs (state) {
       state.totalPurrs += state.autoPurrsPerSecond
+    },
+    resetAutoUpdatePurrs (state) {
+      state.totalPurrs += 0
     }
   },
   actions: {
@@ -73,6 +76,7 @@ export default createStore({
     },
     clearTimer ({ state }) {
       clearInterval(state.timer)
+      console.log(state.timer)
     }
   },
   modules: {
